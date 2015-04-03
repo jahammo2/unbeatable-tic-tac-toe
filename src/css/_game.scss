@@ -1,0 +1,51 @@
+/////////////////////////////////////////////////////////////
+// GENERAL
+/////////////////////////////////////////////////////////////
+
+ul {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	width: 400px;
+	height: 400px;
+	margin: 100px auto;
+	background: lightgreen; 
+	position: relative;
+}
+
+.game-block {
+	width: 30%;
+	height: 120px;
+	background: white; 
+}
+
+.bottom-div {
+	position: absolute;
+	background: white; 
+	height: 14px;
+	width: 100%;
+	bottom:0; 
+}
+
+
+
+
+
+
+
+
+
+
+
+/////////////// COMMENT /////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
