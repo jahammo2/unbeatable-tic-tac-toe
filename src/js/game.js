@@ -21,3 +21,7 @@ app.gameFunctionality = function () {
 };
 
 app.gameFunctionality();
+
+// todo :
+// if first, put x, and if on last move, finish it
+// catscan
