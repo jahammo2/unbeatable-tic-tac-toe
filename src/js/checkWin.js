@@ -22,5 +22,6 @@ app.checkWin = function () {
     if (checkThree(2, 1) || checkThree(5, 1) || checkThree(8, 1) || checkThree(4, 3) || checkThree(5, 1) || checkThree(5, 3) 
        || checkThree(6, 3) || checkThree(5, 4) || checkThree(5, 2)) {
     	app.win();
+    	return true;
     }
 }

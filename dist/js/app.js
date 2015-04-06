@@ -45,10 +45,13 @@ app.checkWin = function () {
     if (checkThree(2, 1) || checkThree(5, 1) || checkThree(8, 1) || checkThree(4, 3) || checkThree(5, 1) || checkThree(5, 3) 
        || checkThree(6, 3) || checkThree(5, 4) || checkThree(5, 2)) {
     	app.win();
+    	return true;
     }
 }
 app.computerReact = function (id) {
 	console.log(id);
+
+	var blocks = $('.game-block');
 
 	var firstT = $('.game-block-first').text(),
 		secondT = $('.game-block-second').text(),
@@ -70,14 +73,19 @@ app.computerReact = function (id) {
 		ninth = $('.game-block-ninth');
 
 	function goForWin () {
-		console.log('win')
+		compTurn = true;
+		for (var i = blocks.length - 1; i >= 0; i--) {
+			if (blocks[i].innerHTML === 'O') {
+				console.log('worked');
+				checkId(i + 1);
+			};		
+		};
+		compTurn = false;
 	}
 
 	var compTurn = false;
 
 	function compMove () {
-		compTurn = true;
-		var blocks = $('.game-block');
 		console.log(app.moves);
 		if (app.moves.length < 2) {
 			if (fifthT === '') {
@@ -101,7 +109,6 @@ app.computerReact = function (id) {
 				eighth.html('O');
 			}
 		}	
-		compTurn = false;
 	}
 
 	function stopThree (num, param1, param2) {
@@ -109,17 +116,26 @@ app.computerReact = function (id) {
 		var block1 = $('#' + (num + param1));
 		var block2 = $('#' + (num + param2));
 		if (compTurn) {
-			if (block.text() === block1.text() && block.text() === 'O') {
+			if (block.text() === block1.text() && block.text() === 'O' && block1.text() === 'O') {
 				block2.html('O');
-			} else if (block.text() === block2.text()) {
+			} else if (block.text() === block2.text() && block.text() === 'O' && block2.text() === 'O') {
 				block1.html('O');
 			}			
 		} else {
-			if (block.text() === block1.text()) {
+			goForWin();
+			if (block.text() === block1.text() && block.text() === 'X' && block1.text() === 'X') {
 				block2.html('O');
-			} else if (block.text() === block2.text()) {
+			} else if (block.text() === block2.text() && block.text() === 'X' && block2.text() === 'X') {
 				block1.html('O');
 			} else {
+				for (var i = app.moves.length - 1; i >= 0; i--) {
+					console.log(app.moves);
+					if (app.moves[i] !== num) {
+						app.moves.push(num);
+						return true;
+					}
+				};
+				console.log(app.moves);
 				compMove();
 			}
 		}
@@ -127,7 +143,6 @@ app.computerReact = function (id) {
 	}
 
 	function row (num, param1, param2) {
-		app.moves.push(num);
 		stopThree(num, param1, param2);
 	} 
 
@@ -139,41 +154,44 @@ app.computerReact = function (id) {
 		stopThree(num, param1, param2);
 	}
 
-	if (id === 1) {
-		row(id,1,2);
-		column(id,3,6);
-		diagonal(id,4,8);
-	} else if (id === 2) {
-		row(id,-1,1);
-		column(id,3,6);
-	} else if (id === 3) {
-		row(id,-1,-2);
-		column(id,3,6);
-		diagonal(id,2,4);
-	} else if (id === 4) {
-		row(id,1,2);
-		column(id,-3,3);
-	} else if (id === 5) {
-		row(id,-1,1);
-		column(id,-3,3);
-		diagonal(id,-4,4);
-		diagonal(id,-2,2);
-	} else if (id === 6) {
-		row(id,-1,-2);
-		column(id,-3,3);
-	} else if (id === 7) {
-		row(id,1,2);
-		column(id,-6,-3);
-		diagonal(id,-2,-4);
-	} else if (id === 8) {
-		row(id,-1,1);
-		column(id,-6,-3);
-	} else {
-		row(id,-1,-2);
-		column(id,-6,-3);
-		diagonal(id,-4,-8);
+	function checkId (id) {
+		if (id === 1) {
+			row(id,1,2);
+			column(id,3,6);
+			diagonal(id,4,8);
+		} else if (id === 2) {
+			row(id,-1,1);
+			column(id,3,6);
+		} else if (id === 3) {
+			row(id,-1,-2);
+			column(id,3,6);
+			diagonal(id,2,4);
+		} else if (id === 4) {
+			row(id,1,2);
+			column(id,-3,3);
+		} else if (id === 5) {
+			row(id,-1,1);
+			column(id,-3,3);
+			diagonal(id,-4,4);
+			diagonal(id,-2,2);
+		} else if (id === 6) {
+			row(id,-1,-2);
+			column(id,-3,3);
+		} else if (id === 7) {
+			row(id,1,2);
+			column(id,-6,-3);
+			diagonal(id,-2,-4);
+		} else if (id === 8) {
+			row(id,-1,1);
+			column(id,-6,-3);
+		} else {
+			row(id,-1,-2);
+			column(id,-6,-3);
+			diagonal(id,-4,-8);
+		}
 	}
 
+	checkId(id);
 
 }
 app.gameFunctionality = function () {
