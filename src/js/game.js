@@ -10,6 +10,8 @@ app.gameFunctionality = function () {
 	$('.game-block').on('click', function () {
 		var block = $(this);
 		if (block.html() === '') {
+			app.humanMove = false;
+			app.turnCount += 1;
 			block.html('X');
 			app.checkWin();
 			computerMove(block.attr('id'));
@@ -21,6 +23,11 @@ app.gameFunctionality = function () {
 };
 
 app.gameFunctionality();
+
+app.moves = [];
+app.stoppage = false;
+app.humanMove = false;
+app.turnCount = 0;
 
 // todo :
 // if first, put x, and if on last move, finish it

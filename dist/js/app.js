@@ -1,6 +1,6 @@
 // The namespace for this application
 var app = {};
-app.moves = [];
+
 
 // var gulp = require('gulp'),
 //     sass = require('gulp-sass'),
@@ -72,11 +72,22 @@ app.computerReact = function (id) {
 		eighth = $('.game-block-eighth'),
 		ninth = $('.game-block-ninth');
 
+	function randomMove () {
+		console.log('random');
+		for (var i = blocks.length - 1; i >= 0; i--) {
+			console.log(blocks[i])
+			if (blocks[i].text === '') {
+				blocks[i].html('O');
+				console.log(blocks[i].text)
+				return true
+			};
+		};
+	}
+
 	function goForWin () {
 		compTurn = true;
 		for (var i = blocks.length - 1; i >= 0; i--) {
 			if (blocks[i].innerHTML === 'O') {
-				console.log('worked');
 				checkId(i + 1);
 			};		
 		};
@@ -100,15 +111,34 @@ app.computerReact = function (id) {
 				seventh.html('O');
 				app.moves.push(7);
 			}
+			console.log(4)
 		} else if (app.moves.length < 6) {
-			if (ninthT === 'X' && fifthT === 'X' && secondT === 'X' && eighthT === 'O') {
+			console.log(6)
+			if (ninthT === 'X' && fifthT === 'X' && secondT === 'X' && eighthT === 'O' && seventhT === '') {
+				console.log(6)
 				seventh.html('O');
+				app.moves.push(7);
+			} else if (ninthT === 'X' && fifthT === 'X' && fourthT === 'X' && secondT === '') {
+				second.html('O');
+				app.moves.push(2);
+			} else {
+				console.log('trying');
+				randomMove();
 			}
 		} else if (app.moves.length < 8) {
-			if (ninthT === 'X' && fifthT === 'X' && secondT === '' && eighthT === '') {
+			if (ninthT === 'X' && fifthT === 'X' && secondT === '' && eighthT === '' && sixthT !== '') {
 				eighth.html('O');
+				app.moves.push(8);
+			} else {
+				console.log('trying');
+				randomMove();
 			}
-		}	
+			// else if (ninthT === 'X' && fifthT === 'X' && firstT === 'O' && seventhT === 'X') {
+			// 	fourth.html('O');
+			// 	app.moves.push(4);
+			// }
+		} 
+		app.humanMove = true;
 	}
 
 	function stopThree (num, param1, param2) {
@@ -116,30 +146,49 @@ app.computerReact = function (id) {
 		var block1 = $('#' + (num + param1));
 		var block2 = $('#' + (num + param2));
 		if (compTurn) {
-			if (block.text() === block1.text() && block.text() === 'O' && block1.text() === 'O') {
+			if (block.text() === block1.text() && block.text() === 'O' && block1.text() === 'O' && block2.text() === '') {
 				block2.html('O');
-			} else if (block.text() === block2.text() && block.text() === 'O' && block2.text() === 'O') {
+				app.moves.push(num);
+				console.log('worked');
+				app.stoppage = true;
+			} else if (block.text() === block2.text() && block.text() === 'O' && block2.text() === 'O' && block1.text() === '') {
 				block1.html('O');
+				app.moves.push(num);
+				console.log('worked');
+				app.stoppage = true;
 			}			
 		} else {
-			goForWin();
-			if (block.text() === block1.text() && block.text() === 'X' && block1.text() === 'X') {
-				block2.html('O');
-			} else if (block.text() === block2.text() && block.text() === 'X' && block2.text() === 'X') {
-				block1.html('O');
-			} else {
-				for (var i = app.moves.length - 1; i >= 0; i--) {
+			console.log(app.humanMove);
+			if (!app.humanMove) {
+				console.log(app.humanMove);
+				goForWin();
+			};
+			if (!app.stoppage) {
+
+				if (block.text() === block1.text() && block.text() === 'X' && block1.text() === 'X' && block2.text() === '') {
+					block2.html('O');
+					console.log('worked');
+					app.moves.push(num);
+					app.humanMove = true;
+				} else if (block.text() === block2.text() && block.text() === 'X' && block2.text() === 'X' && block1.text() === '') {
+					block1.html('O');
+					app.moves.push(num);
+					console.log('worked');
+					app.humanMove = true;
+				} else {
+					if (app.moves.length <= app.turnCount) {
+						for (var i = app.moves.length - 1; i >= 0; i--) {
+							if (app.moves[i] !== num) {
+								app.moves.push(num);
+								return false;
+							}
+						};
+					};
 					console.log(app.moves);
-					if (app.moves[i] !== num) {
-						app.moves.push(num);
-						return true;
-					}
-				};
-				console.log(app.moves);
-				compMove();
-			}
-		}
-		
+					compMove();
+				}
+			}	
+		}	
 	}
 
 	function row (num, param1, param2) {
@@ -206,6 +255,8 @@ app.gameFunctionality = function () {
 	$('.game-block').on('click', function () {
 		var block = $(this);
 		if (block.html() === '') {
+			app.humanMove = false;
+			app.turnCount += 1;
 			block.html('X');
 			app.checkWin();
 			computerMove(block.attr('id'));
@@ -217,6 +268,11 @@ app.gameFunctionality = function () {
 };
 
 app.gameFunctionality();
+
+app.moves = [];
+app.stoppage = false;
+app.humanMove = false;
+app.turnCount = 0;
 
 // todo :
 // if first, put x, and if on last move, finish it
