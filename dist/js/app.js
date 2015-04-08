@@ -281,20 +281,19 @@ app.computerReact = function (id) {
 }
 app.lose = function () {
 	console.log('lost')
-	$('.lost-heading').animate({
+	endGame('.lost-heading');
+}
+
+function endGame (el) {
+	$(el).animate({
 		'margin-left': '-20%'
 	}, 5000, function () {
 		location.reload();
-	})
+	});
 }
 
 app.catScan = function () {
-	console.log('lost')
-	$('.cat-heading').animate({
-		'margin-left': '-20%'
-	}, 5000, function () {
-		location.reload();
-	})
+	endGame('.cat-heading')
 }
 app.gameFunctionality = function () {
 
@@ -304,7 +303,7 @@ app.gameFunctionality = function () {
 		$('.game-block-first').html('O');
 		$('.first-heading').html('Computer goes first');
 	} else {
-		$('.first-heading').html('You goes first');
+		$('.first-heading').html('You go first');
 	}
 
 	function computerMove (id) {

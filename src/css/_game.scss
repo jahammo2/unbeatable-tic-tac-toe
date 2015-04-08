@@ -3,14 +3,20 @@
 /////////////////////////////////////////////////////////////
 
 body,
-html {
+html,
+.game-blocker {
 	width: 100%;
 	height: 100%;
+}
+
+.game-blocker {
+	
 }
 
 body {
 	background: #D40E52;
 	color: #FCE014;  
+	overflow: hidden;
 }
 
 ul {
@@ -64,11 +70,10 @@ ul {
 }
 
 .game-end {
-	margin-left: 102%; 
+	margin-left: 105%; 
 	z-index: 10;
 	width: 20%;
 	text-align: center; 
-	// visibility: hidden;
 }
 
 .checkbox-heading {
@@ -88,7 +93,6 @@ ul {
 	font-size: 16px; 
 	font-weight: 500;
 	margin-left: 65%; 
-	// visibility: hidden; 
 }
 
 .play-button {

@@ -6,7 +6,7 @@ app.gameFunctionality = function () {
 		$('.game-block-first').html('O');
 		$('.first-heading').html('Computer goes first');
 	} else {
-		$('.first-heading').html('You goes first');
+		$('.first-heading').html('You go first');
 	}
 
 	function computerMove (id) {
