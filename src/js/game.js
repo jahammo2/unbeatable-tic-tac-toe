@@ -7,10 +7,15 @@ app.gameFunctionality = function () {
 		app.checkWin();
 	}
 
+	app.moves = [];
+
 	$('.game-block').on('click', function () {
 		var block = $(this);
-		if (block.html() === '') {
-			app.humanMove = false;
+		app.stoppage = false;
+		app.humanMove = false;
+		app.randomDone = true;
+		app.turnCount = 0;
+		if (block.html() === '') {			
 			app.turnCount += 1;
 			block.html('X');
 			app.checkWin();
@@ -24,10 +29,7 @@ app.gameFunctionality = function () {
 
 app.gameFunctionality();
 
-app.moves = [];
-app.stoppage = false;
-app.humanMove = false;
-app.turnCount = 0;
+
 
 // todo :
 // if first, put x, and if on last move, finish it

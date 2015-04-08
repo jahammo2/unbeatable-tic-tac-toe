@@ -73,15 +73,29 @@ app.computerReact = function (id) {
 		ninth = $('.game-block-ninth');
 
 	function randomMove () {
-		console.log('random');
-		for (var i = blocks.length - 1; i >= 0; i--) {
-			console.log(blocks[i])
-			if (blocks[i].text === '') {
-				blocks[i].html('O');
-				console.log(blocks[i].text)
-				return true
-			};
-		};
+		if (app.randomDone) {
+			console.log('random');
+			for (var i = blocks.length - 1; i >= 0; i--) {
+				console.log(i);
+				if (blocks[i].innerHTML === '') {
+					console.log(i);
+					console.log($('#' + (i+1)));
+					$('#' + (i+1)).html('O');
+					console.log(blocks[i].innerHTML);
+					app.moves.push(i);
+					i = 0;
+					app.randomDone = false;
+				};
+			};	
+		}
+	}
+
+	function stopTurn (num) {
+		app.moves.push(num);
+		console.log('worked');
+		app.stoppage = true;
+		app.randomDone = false;
+		app.humanMove = true;
 	}
 
 	function goForWin () {
@@ -115,17 +129,18 @@ app.computerReact = function (id) {
 		} else if (app.moves.length < 6) {
 			console.log(6)
 			if (ninthT === 'X' && fifthT === 'X' && secondT === 'X' && eighthT === 'O' && seventhT === '') {
-				console.log(6)
 				seventh.html('O');
-				app.moves.push(7);
+				stopTurn(7);
 			} else if (ninthT === 'X' && fifthT === 'X' && fourthT === 'X' && secondT === '') {
 				second.html('O');
-				app.moves.push(2);
+				stopTurn(2);
+				console.log('trying');
 			} else {
 				console.log('trying');
-				randomMove();
 			}
-		} else if (app.moves.length < 8) {
+			
+		} else if (app.moves.length < 8 && app.moves.length >= 6) {
+			console.log('bam');
 			if (ninthT === 'X' && fifthT === 'X' && secondT === '' && eighthT === '' && sixthT !== '') {
 				eighth.html('O');
 				app.moves.push(8);
@@ -141,6 +156,8 @@ app.computerReact = function (id) {
 		app.humanMove = true;
 	}
 
+	var counter = 0;
+
 	function stopThree (num, param1, param2) {
 		var block = $('#' + num);
 		var block1 = $('#' + (num + param1));
@@ -148,14 +165,10 @@ app.computerReact = function (id) {
 		if (compTurn) {
 			if (block.text() === block1.text() && block.text() === 'O' && block1.text() === 'O' && block2.text() === '') {
 				block2.html('O');
-				app.moves.push(num);
-				console.log('worked');
-				app.stoppage = true;
+				stopTurn(num);
 			} else if (block.text() === block2.text() && block.text() === 'O' && block2.text() === 'O' && block1.text() === '') {
 				block1.html('O');
-				app.moves.push(num);
-				console.log('worked');
-				app.stoppage = true;
+				stopTurn(num);
 			}			
 		} else {
 			console.log(app.humanMove);
@@ -163,29 +176,39 @@ app.computerReact = function (id) {
 				console.log(app.humanMove);
 				goForWin();
 			};
+			console.log(app.stoppage);
 			if (!app.stoppage) {
-
+				console.log(app.stoppage);
 				if (block.text() === block1.text() && block.text() === 'X' && block1.text() === 'X' && block2.text() === '') {
 					block2.html('O');
-					console.log('worked');
-					app.moves.push(num);
-					app.humanMove = true;
+					app.moves.push(block2.attr('id'))
+					stopTurn(num);
 				} else if (block.text() === block2.text() && block.text() === 'X' && block2.text() === 'X' && block1.text() === '') {
 					block1.html('O');
-					app.moves.push(num);
-					console.log('worked');
-					app.humanMove = true;
+					app.moves.push(block1.attr('id'))
+					stopTurn(num);
 				} else {
 					if (app.moves.length <= app.turnCount) {
 						for (var i = app.moves.length - 1; i >= 0; i--) {
 							if (app.moves[i] !== num) {
 								app.moves.push(num);
-								return false;
 							}
 						};
 					};
 					console.log(app.moves);
-					compMove();
+					counter += 1;
+					console.log(counter);
+					if ((num === 2 || num === 4 || num === 6 || num === 8) && counter === 2) {
+						console.log('here');
+						compMove();
+						
+					} else if ((num === 1 || num === 3 || num === 7 || num === 9) && counter === 3) {
+						compMove();
+						console.log('here');
+					} else if (num === 5 && counter === 4) {
+						compMove();
+						console.log('here');
+					}
 				}
 			}	
 		}	
@@ -252,10 +275,15 @@ app.gameFunctionality = function () {
 		app.checkWin();
 	}
 
+	app.moves = [];
+
 	$('.game-block').on('click', function () {
 		var block = $(this);
-		if (block.html() === '') {
-			app.humanMove = false;
+		app.stoppage = false;
+		app.humanMove = false;
+		app.randomDone = true;
+		app.turnCount = 0;
+		if (block.html() === '') {			
 			app.turnCount += 1;
 			block.html('X');
 			app.checkWin();
@@ -269,10 +297,7 @@ app.gameFunctionality = function () {
 
 app.gameFunctionality();
 
-app.moves = [];
-app.stoppage = false;
-app.humanMove = false;
-app.turnCount = 0;
+
 
 // todo :
 // if first, put x, and if on last move, finish it
