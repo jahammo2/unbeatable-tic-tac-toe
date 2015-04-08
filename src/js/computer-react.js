@@ -32,9 +32,8 @@ app.computerReact = function (id) {
 					console.log($('#' + (i+1)));
 					$('#' + (i+1)).html('O');
 					console.log(blocks[i].innerHTML);
-					app.moves.push(i);
 					i = 0;
-					app.randomDone = false;
+					stopTurn(i);
 				};
 			};	
 		}
@@ -46,6 +45,7 @@ app.computerReact = function (id) {
 		app.stoppage = true;
 		app.randomDone = false;
 		app.humanMove = true;
+		compTurn = false;
 	}
 
 	function goForWin () {
@@ -67,14 +67,18 @@ app.computerReact = function (id) {
 				app.moves.push(5);
 				fifth.html('O');
 			} else {
-				app.moves.push(1);
-				first.html('O');
+				// app.moves.push(1);
+				// first.html('O');
+				randomMove();
 			}
 		} else if (app.moves.length < 4) {
 			if (ninthT === 'X' && fifthT === 'X' && seventhT === '') {
 				seventh.html('O');
 				app.moves.push(7);
+			} else {
+				randomMove();
 			}
+			
 			console.log(4)
 		} else if (app.moves.length < 6) {
 			console.log(6)
@@ -85,8 +89,14 @@ app.computerReact = function (id) {
 				second.html('O');
 				stopTurn(2);
 				console.log('trying');
-			} else {
+			} else if (firstT === 'X' && secondT === 'O' && thirdT === 'X' && fifthT === 'O' && eighthT === 'X') {
 				console.log('trying');
+				// randomMove();
+			}
+			else {
+				console.log('trying');
+				randomMove();
+
 			}
 			
 		} else if (app.moves.length < 8 && app.moves.length >= 6) {
@@ -115,9 +125,11 @@ app.computerReact = function (id) {
 		if (compTurn) {
 			if (block.text() === block1.text() && block.text() === 'O' && block1.text() === 'O' && block2.text() === '') {
 				block2.html('O');
+				console.log('win');
 				stopTurn(num);
 			} else if (block.text() === block2.text() && block.text() === 'O' && block2.text() === 'O' && block1.text() === '') {
 				block1.html('O');
+				console.log('win');
 				stopTurn(num);
 			}			
 		} else {
@@ -138,6 +150,7 @@ app.computerReact = function (id) {
 					app.moves.push(block1.attr('id'))
 					stopTurn(num);
 				} else {
+					console.log(app.turnCount);
 					if (app.moves.length <= app.turnCount) {
 						for (var i = app.moves.length - 1; i >= 0; i--) {
 							if (app.moves[i] !== num) {
@@ -149,15 +162,15 @@ app.computerReact = function (id) {
 					counter += 1;
 					console.log(counter);
 					if ((num === 2 || num === 4 || num === 6 || num === 8) && counter === 2) {
-						console.log('here');
+						console.log('here counter');
 						compMove();
 						
 					} else if ((num === 1 || num === 3 || num === 7 || num === 9) && counter === 3) {
 						compMove();
-						console.log('here');
+						console.log('here counter');
 					} else if (num === 5 && counter === 4) {
 						compMove();
-						console.log('here');
+						console.log('here counter');
 					}
 				}
 			}	

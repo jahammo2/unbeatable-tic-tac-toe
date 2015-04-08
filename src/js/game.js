@@ -1,5 +1,14 @@
 app.gameFunctionality = function () {
 
+	var randomNum = Math.random();
+
+	if (randomNum >= .5) {
+		$('.game-block-first').html('O');
+		$('.first-heading').html('Computer goes first');
+	} else {
+		$('.first-heading').html('You goes first');
+	}
+
 	function computerMove (id) {
 		console.log(id);
 		id = Number(id);
@@ -8,13 +17,13 @@ app.gameFunctionality = function () {
 	}
 
 	app.moves = [];
+	app.turnCount = 0;
 
 	$('.game-block').on('click', function () {
 		var block = $(this);
 		app.stoppage = false;
 		app.humanMove = false;
 		app.randomDone = true;
-		app.turnCount = 0;
 		if (block.html() === '') {			
 			app.turnCount += 1;
 			block.html('X');
@@ -27,7 +36,7 @@ app.gameFunctionality = function () {
 	
 };
 
-app.gameFunctionality();
+// app.gameFunctionality();
 
 
 
