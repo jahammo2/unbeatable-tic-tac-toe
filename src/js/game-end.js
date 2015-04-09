@@ -4,7 +4,7 @@ app.lose = function() {
 
 function endGame(el) {
     $(el).animate({
-        'margin-left': '-30%'
+        'margin-left': '-100%'
     }, 5000, function() {
         location.reload();
     });
