@@ -79,7 +79,6 @@ app.checkWin = function () {
     }
 }
 app.computerReact = function (id) {
-	console.log(id);
 
 	var blocks = $('.game-block');
 
@@ -104,14 +103,9 @@ app.computerReact = function (id) {
 
 	function randomMove () {
 		if (app.randomDone) {
-			console.log('random');
 			for (var i = blocks.length - 1; i >= 0; i--) {
-				console.log(i);
 				if (blocks[i].innerHTML === '') {
-					console.log(i);
-					console.log($('#' + (i+1)));
 					$('#' + (i+1)).html('O');
-					console.log(blocks[i].innerHTML);
 					i = 0;
 					stopTurn(i);
 				};
@@ -121,7 +115,6 @@ app.computerReact = function (id) {
 
 	function stopTurn (num) {
 		app.moves.push(num);
-		console.log('worked');
 		app.stoppage = true;
 		app.randomDone = false;
 		app.humanMove = true;
@@ -141,7 +134,6 @@ app.computerReact = function (id) {
 	var compTurn = false;
 
 	function compMove () {
-		console.log(app.moves);
 		if (app.moves.length < 2) {
 			if (fifthT === '') {
 				app.moves.push(5);
@@ -193,35 +185,25 @@ app.computerReact = function (id) {
 				randomMove();
 			}
 			
-			console.log(4)
 		} else if (app.moves.length < 6) {
-			console.log(6)
 			if (ninthT === 'X' && fifthT === 'X' && secondT === 'X' && eighthT === 'O' && seventhT === '') {
 				seventh.html('O');
 				stopTurn(7);
 			} else if (ninthT === 'X' && fifthT === 'X' && fourthT === 'X' && secondT === '') {
 				second.html('O');
 				stopTurn(2);
-				console.log('trying');
 			} else {
-				console.log('trying');
 				randomMove();
 
 			}
 			
 		} else if (app.moves.length < 8 && app.moves.length >= 6) {
-			console.log('bam');
 			if (ninthT === 'X' && fifthT === 'X' && secondT === '' && eighthT === '' && sixthT !== '') {
 				eighth.html('O');
 				app.moves.push(8);
 			} else {
-				console.log('trying');
 				randomMove();
 			}
-			// else if (ninthT === 'X' && fifthT === 'X' && firstT === 'O' && seventhT === 'X') {
-			// 	fourth.html('O');
-			// 	app.moves.push(4);
-			// }
 		} 
 		app.humanMove = true;
 	}
@@ -235,22 +217,16 @@ app.computerReact = function (id) {
 		if (compTurn) {
 			if (block.text() === block1.text() && block.text() === 'O' && block1.text() === 'O' && block2.text() === '') {
 				block2.html('O');
-				console.log('win');
 				stopTurn(num);
 			} else if (block.text() === block2.text() && block.text() === 'O' && block2.text() === 'O' && block1.text() === '') {
 				block1.html('O');
-				console.log('win');
 				stopTurn(num);
 			}			
 		} else {
-			console.log(app.humanMove);
 			if (!app.humanMove) {
-				console.log(app.humanMove);
 				goForWin();
 			};
-			console.log(app.stoppage);
 			if (!app.stoppage) {
-				console.log(app.stoppage);
 				if (block.text() === block1.text() && block.text() === 'X' && block1.text() === 'X' && block2.text() === '') {
 					block2.html('O');
 					app.moves.push(block2.attr('id'))
@@ -260,7 +236,6 @@ app.computerReact = function (id) {
 					app.moves.push(block1.attr('id'))
 					stopTurn(num);
 				} else {
-					console.log(app.turnCount);
 					if (app.moves.length <= app.turnCount) {
 						for (var i = app.moves.length - 1; i >= 0; i--) {
 							if (app.moves[i] !== num && app.moves.length <= app.turnCount) {
@@ -268,19 +243,13 @@ app.computerReact = function (id) {
 							}
 						};
 					};
-					console.log(app.moves);
 					counter += 1;
-					console.log(counter);
 					if ((num === 2 || num === 4 || num === 6 || num === 8) && counter === 2) {
-						console.log('here counter');
-						compMove();
-						
+						compMove();						
 					} else if ((num === 1 || num === 3 || num === 7 || num === 9) && counter === 3) {
 						compMove();
-						console.log('here counter');
 					} else if (num === 5 && counter === 4) {
 						compMove();
-						console.log('here counter');
 					}
 				}
 			}	
