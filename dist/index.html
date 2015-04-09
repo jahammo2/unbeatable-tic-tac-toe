@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Title</title>
+
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<!--   <div class="game-blocker"></div> -->
+
+  <input id="checkbox-heading" class="heading checkbox-heading" type="checkbox">
+  <div onclick="app.gameFunctionality()" class="heading begin-div">
+    <label for="checkbox-heading" class="play-button">Play</label>
+  </div>
+  <h4 onclick="location.reload()" class="heading reset">reset</h4>
+  <h2 class="heading first-heading">fas</h2>
+  <h1 class="heading game-end lost-heading">You Lose!</h1>
+  <h1 class="heading game-end cat-heading">Cat Scan!</h1>
+
+  <ul>
+    <div class="bottom-div"></div>
+    <li id="1" class="game-block game-block-first"></li>
+    <li id="2" class="game-block game-block-second"></li>
+    <li id="3" class="game-block game-block-third"></li>
+    <li id="4" class="game-block game-block-fourth"></li>
+    <li id="5" class="game-block game-block-fifth"></li>
+    <li id="6" class="game-block game-block-sixth"></li>
+    <li id="7" class="game-block game-block-seventh"></li>
+    <li id="8" class="game-block game-block-eighth"></li>
+    <li id="9" class="game-block game-block-ninth"></li>
+  </ul>
+
+  <script src="js/vendor.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
