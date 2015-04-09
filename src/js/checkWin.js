@@ -15,6 +15,15 @@ app.checkWin = function () {
 		var idNumLess = $('#' + (num - param)).text();
 		var idNumMore = $('#' + (num + param)).text();
 		if ((idNum === idNumLess) && (idNum === idNumMore) && (idNum !== '')) {
+			function changeColor (el) {
+				el.css({
+					'background': 'white',
+					'color': '#EB1767'
+				});
+			};
+			changeColor($('#' + num));
+			changeColor($('#' + (num - param)));
+			changeColor($('#' + (num + param)));
 			return true;
 		}
 	}
@@ -23,5 +32,25 @@ app.checkWin = function () {
        || checkThree(6, 3) || checkThree(5, 4) || checkThree(5, 2)) {
     	app.lose();
     	return true;
+    }
+
+    var blocks = $('.game-block');
+
+    function checkBlocks () {
+    	var counter = 0;
+    	for (var i = blocks.length - 1; i >= 0; i--) {
+			if (blocks[i].innerHTML !== '') {
+				counter +=1;
+			}
+		};
+		if (counter === 9) {
+			return true;
+		} else {
+			return false;
+		}
+    }
+
+    if (checkBlocks()) {
+    	app.catScan();
     }
 }

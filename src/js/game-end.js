@@ -1,11 +1,10 @@
 app.lose = function () {
-	console.log('lost')
 	endGame('.lost-heading');
 }
 
 function endGame (el) {
 	$(el).animate({
-		'margin-left': '-20%'
+		'margin-left': '-30%'
 	}, 5000, function () {
 		location.reload();
 	});
