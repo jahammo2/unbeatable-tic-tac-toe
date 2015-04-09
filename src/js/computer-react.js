@@ -123,11 +123,7 @@ app.computerReact = function (id) {
 				second.html('O');
 				stopTurn(2);
 				console.log('trying');
-			} else if (firstT === 'X' && secondT === 'O' && thirdT === 'X' && fifthT === 'O' && eighthT === 'X') {
-				console.log('trying');
-				// randomMove();
-			}
-			else {
+			} else {
 				console.log('trying');
 				randomMove();
 

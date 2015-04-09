@@ -2,7 +2,7 @@ app.gameFunctionality = function () {
 
 	var randomNum = Math.random();
 
-	if (randomNum >= .5) {
+	if (randomNum >= 2) {
 		$('.game-block-first').html('O');
 		$('.first-heading').html('Computer goes first');
 	} else {

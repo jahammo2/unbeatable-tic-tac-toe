@@ -173,11 +173,7 @@ app.computerReact = function (id) {
 				second.html('O');
 				stopTurn(2);
 				console.log('trying');
-			} else if (firstT === 'X' && secondT === 'O' && thirdT === 'X' && fifthT === 'O' && eighthT === 'X') {
-				console.log('trying');
-				// randomMove();
-			}
-			else {
+			} else {
 				console.log('trying');
 				randomMove();
 
@@ -333,7 +329,7 @@ app.gameFunctionality = function () {
 
 	var randomNum = Math.random();
 
-	if (randomNum >= .5) {
+	if (randomNum >= 2) {
 		$('.game-block-first').html('O');
 		$('.first-heading').html('Computer goes first');
 	} else {
