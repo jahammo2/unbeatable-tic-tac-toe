@@ -28,8 +28,8 @@ html,
 }
 
 body {
-	background: #D40E52;
-	color: #FCE014;  
+	background: #EB1767;
+	color: white;  
 	overflow: hidden;
 }
 
@@ -41,7 +41,7 @@ ul {
 	width: 400px;
 	height: 400px;
 	margin: 150px auto;
-	background: #FCE014; 
+	background: white; 
 	position: relative;
 	font-size: 80px; 
 }
@@ -49,13 +49,13 @@ ul {
 .game-block {
 	width: 30%;
 	height: 120px;
-	background: #D40E52; 
+	background: #EB1767; 
 	padding: 1%;
 }
 
 .bottom-div {
 	position: absolute;
-	background: #D40E52; 
+	background: #EB1767; 
 	height: 14px;
 	width: 100%;
 	bottom: 0; 
@@ -87,7 +87,8 @@ ul {
 	margin-left: 105%; 
 	z-index: 10;
 	width: 20%;
-	text-align: center; 
+	text-align: center;
+	z-index: 100;  
 }
 
 .checkbox-heading {
@@ -114,22 +115,22 @@ ul {
 	font-size: 22px;
 	// font-weight: bold; 
 	width: 60px;
-	color: #fce114;
+	color: white;
 	padding: 12px 20px 10px;
 	background: -moz-linear-gradient(
 		top,
 		#d40e53 0%,
 		#d40e53);
-	border: 3px solid #fce114;
+	border: 3px solid white;
 	-moz-box-shadow:
-		0px 3px 11px rgba(212,14,83,0.5),
-		inset 0px 0px 0px rgba(212,14,83,1);
+		0px 3px 11px rgba(235,23,103,0.5),
+		inset 0px 0px 0px rgba(235,23,103,1);
 	-webkit-box-shadow:
-		0px 3px 11px rgba(212,14,83,0.5),
-		inset 0px 0px 0px rgba(212,14,83,1);
+		0px 3px 11px rgba(235,23,103,0.5),
+		inset 0px 0px 0px rgba(235,23,103,1);
 	box-shadow:
-		0px 3px 11px rgba(212,14,83,0.5),
-		inset 0px 0px 0px rgba(212,14,83,1);
+		0px 3px 11px rgba(235,23,103,0.5),
+		inset 0px 0px 0px rgba(235,23,103,1);
 	text-shadow:
 		0px -1px 0px rgba(000,000,000,0.2),
 		0px 1px 0px rgba(255,255,255,0.3);
@@ -142,17 +143,17 @@ ul {
 	color: #d40e53;
 	background: -webkit-gradient(
 		linear, left top, left bottom,
-		from(#fce114),
-		to(#fce114));
+		from(white),
+		to(white));
 	-moz-box-shadow:
-		0px 3px 11px rgba(212,14,83,0.5),
-		inset 0px 0px 0px rgba(212,14,83,1);
+		0px 3px 11px rgba(235,23,103,0.5),
+		inset 0px 0px 0px rgba(235,23,103,1);
 	-webkit-box-shadow:
-		0px 3px 11px rgba(212,14,83,0.5),
-		inset 0px 0px 0px rgba(212,14,83,1);
+		0px 3px 11px rgba(235,23,103,0.5),
+		inset 0px 0px 0px rgba(235,23,103,1);
 	box-shadow:
-		0px 3px 11px rgba(212,14,83,0.5),
-		inset 0px 0px 0px rgba(212,14,83,1);
+		0px 3px 11px rgba(235,23,103,0.5),
+		inset 0px 0px 0px rgba(235,23,103,1);
 	text-shadow:
 		0px -1px 0px rgba(000,000,000,0.2),
 		0px 1px 0px rgba(255,255,255,0.3);
