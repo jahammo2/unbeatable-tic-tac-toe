@@ -340,8 +340,8 @@ app.gameFunctionality = function () {
 	function computerMove (id) {
 		id = Number(id);
 		$('.game-blocker-checkbox').prop('checked', true);
-		app.computerReact(id);
-		$('.game-blocker-checkbox').prop('checked', false);
+		window.setTimeout(function () {app.computerReact(id)}, 1000);
+		window.setTimeout(function () {$('.game-blocker-checkbox').prop('checked', false)}, 1000);
 		app.checkWin();
 	}
 

@@ -73,6 +73,10 @@ body, html, .game-blocker {
   display: none;
   background: transparent; }
 
+.game-blocker-checkbox {
+  visibility: hidden;
+  position: absolute; }
+
 .game-blocker-checkbox:checked ~ .game-blocker {
   z-index: 1;
   display: block;
