@@ -2,7 +2,7 @@ app.gameFunctionality = function () {
 
 	var randomNum = Math.random();
 
-	if (randomNum >= 2) {
+	if (randomNum >= .5) {
 		$('.game-block-first').html('O');
 		$('.first-heading').html('Computer goes first');
 	} else {
@@ -10,9 +10,10 @@ app.gameFunctionality = function () {
 	}
 
 	function computerMove (id) {
-		console.log(id);
 		id = Number(id);
+		$('.game-blocker-checkbox').prop('checked', true);
 		app.computerReact(id);
+		$('.game-blocker-checkbox').prop('checked', false);
 		app.checkWin();
 	}
 
@@ -33,7 +34,6 @@ app.gameFunctionality = function () {
 			console.log('spot already taken');
 		}
 	});
-	
 };
 
 // app.gameFunctionality();

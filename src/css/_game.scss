@@ -10,7 +10,16 @@ html,
 }
 
 .game-blocker {
-	
+	position: absolute;
+	z-index: -1; 
+	display: none;
+	background: transparent;  
+}
+
+.game-blocker-checkbox:checked ~ .game-blocker {
+	z-index: 1; 
+	display: block; 
+	background: transparent; 
 }
 
 body {
