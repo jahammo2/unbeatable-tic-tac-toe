@@ -2,7 +2,6 @@
 var app = {};
 
 app.gameBegan = false;
-
 // var gulp = require('gulp'),
 //     sass = require('gulp-sass'),
 //     neat = require('node-neat').includePaths;
@@ -22,369 +21,367 @@ app.gameBegan = false;
 // gulp.task('default',function(){
 //     gulp.start('styles');
 // });
-app.checkWin = function () {
+app.checkWin = function() {
 
-	var first = $('.game-block-first').html(),
-		second = $('.game-block-second').html(),
-		third = $('.game-block-third').html(),
-		fourth = $('.game-block-fourth').html(),
-		fifth = $('.game-block-fifth').html(),
-		sixth = $('.game-block-sixth').html(),
-		seventh = $('.game-block-seventh').html(),
-		eighth = $('.game-block-eighth').html(),
-		ninth = $('.game-block-ninth').html();
+    var first = $('.game-block-first').html(),
+        second = $('.game-block-second').html(),
+        third = $('.game-block-third').html(),
+        fourth = $('.game-block-fourth').html(),
+        fifth = $('.game-block-fifth').html(),
+        sixth = $('.game-block-sixth').html(),
+        seventh = $('.game-block-seventh').html(),
+        eighth = $('.game-block-eighth').html(),
+        ninth = $('.game-block-ninth').html();
 
-	function checkThree (num, param) {
-		var idNum = $('#' + num).text();
-		var idNumLess = $('#' + (num - param)).text();
-		var idNumMore = $('#' + (num + param)).text();
-		if ((idNum === idNumLess) && (idNum === idNumMore) && (idNum !== '')) {
-			function changeColor (el) {
-				el.css({
-					'background': 'white',
-					'color': '#EB1767'
-				});
-			};
-			changeColor($('#' + num));
-			changeColor($('#' + (num - param)));
-			changeColor($('#' + (num + param)));
-			return true;
-		}
-	}
+    function checkThree(num, param) {
+        var idNum = $('#' + num).text();
+        var idNumLess = $('#' + (num - param)).text();
+        var idNumMore = $('#' + (num + param)).text();
+        if ((idNum === idNumLess) && (idNum === idNumMore) && (idNum !== '')) {
+            function changeColor(el) {
+                el.css({
+                    'background': 'white',
+                    'color': '#EB1767'
+                });
+            };
+            changeColor($('#' + num));
+            changeColor($('#' + (num - param)));
+            changeColor($('#' + (num + param)));
+            return true;
+        }
+    }
 
-    if (checkThree(2, 1) || checkThree(5, 1) || checkThree(8, 1) || checkThree(4, 3) || checkThree(5, 1) || checkThree(5, 3) 
-       || checkThree(6, 3) || checkThree(5, 4) || checkThree(5, 2)) {
-    	app.lose();
-    	return true;
+    if (checkThree(2, 1) || checkThree(5, 1) || checkThree(8, 1) || checkThree(4, 3) || checkThree(5, 1) || checkThree(5, 3) || checkThree(6, 3) || checkThree(5, 4) || checkThree(5, 2)) {
+        app.lose();
+        return true;
     }
 
     var blocks = $('.game-block');
 
-    function checkBlocks () {
-    	var counter = 0;
-    	for (var i = blocks.length - 1; i >= 0; i--) {
-			if (blocks[i].innerHTML !== '') {
-				counter +=1;
-			}
-		};
-		if (counter === 9) {
-			return true;
-		} else {
-			return false;
-		}
+    function checkBlocks() {
+        var counter = 0;
+        for (var i = blocks.length - 1; i >= 0; i--) {
+            if (blocks[i].innerHTML !== '') {
+                counter += 1;
+            }
+        };
+        if (counter === 9) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     if (checkBlocks()) {
-    	app.catScan();
+        app.catScan();
     }
 }
-app.computerReact = function (id) {
+app.computerReact = function(id) {
 
-	var blocks = $('.game-block');
+    var blocks = $('.game-block');
 
-	var firstT = $('.game-block-first').text(),
-		secondT = $('.game-block-second').text(),
-		thirdT = $('.game-block-third').text(),
-		fourthT = $('.game-block-fourth').text(),
-		fifthT = $('.game-block-fifth').text(),
-		sixthT = $('.game-block-sixth').text(),
-		seventhT = $('.game-block-seventh').text(),
-		eighthT = $('.game-block-eighth').text(),
-		ninthT = $('.game-block-ninth').text(),
-		first = $('.game-block-first'),
-		second = $('.game-block-second'),
-		third = $('.game-block-third'),
-		fourth = $('.game-block-fourth'),
-		fifth = $('.game-block-fifth'),
-		sixth = $('.game-block-sixth'),
-		seventh = $('.game-block-seventh'),
-		eighth = $('.game-block-eighth'),
-		ninth = $('.game-block-ninth');
+    var firstT = $('.game-block-first').text(),
+        secondT = $('.game-block-second').text(),
+        thirdT = $('.game-block-third').text(),
+        fourthT = $('.game-block-fourth').text(),
+        fifthT = $('.game-block-fifth').text(),
+        sixthT = $('.game-block-sixth').text(),
+        seventhT = $('.game-block-seventh').text(),
+        eighthT = $('.game-block-eighth').text(),
+        ninthT = $('.game-block-ninth').text(),
+        first = $('.game-block-first'),
+        second = $('.game-block-second'),
+        third = $('.game-block-third'),
+        fourth = $('.game-block-fourth'),
+        fifth = $('.game-block-fifth'),
+        sixth = $('.game-block-sixth'),
+        seventh = $('.game-block-seventh'),
+        eighth = $('.game-block-eighth'),
+        ninth = $('.game-block-ninth');
 
-	function randomMove () {
-		if (app.randomDone) {
-			for (var i = blocks.length - 1; i >= 0; i--) {
-				if (blocks[i].innerHTML === '') {
-					$('#' + (i+1)).html('O');
-					i = 0;
-					stopTurn(i);
-				};
-			};	
-		}
-	}
+    function randomMove() {
+        if (app.randomDone) {
+            for (var i = blocks.length - 1; i >= 0; i--) {
+                if (blocks[i].innerHTML === '') {
+                    $('#' + (i + 1)).html('O');
+                    i = 0;
+                    stopTurn(i);
+                };
+            };
+        }
+    }
 
-	function stopTurn (num) {
-		app.moves.push(num);
-		app.stoppage = true;
-		app.randomDone = false;
-		app.humanMove = true;
-		compTurn = false;
-	}
+    function stopTurn(num) {
+        app.moves.push(num);
+        app.stoppage = true;
+        app.randomDone = false;
+        app.humanMove = true;
+        compTurn = false;
+    }
 
-	function goForWin () {
-		compTurn = true;
-		for (var i = blocks.length - 1; i >= 0; i--) {
-			if (blocks[i].innerHTML === 'O') {
-				checkId(i + 1);
-			};		
-		};
-		compTurn = false;
-	}
+    function goForWin() {
+        compTurn = true;
+        for (var i = blocks.length - 1; i >= 0; i--) {
+            if (blocks[i].innerHTML === 'O') {
+                checkId(i + 1);
+            };
+        };
+        compTurn = false;
+    }
 
-	var compTurn = false;
+    var compTurn = false;
 
-	function compMove () {
-		if (app.moves.length < 2) {
-			if (fifthT === '') {
-				app.moves.push(5);
-				fifth.html('O');
-			} else {
-				randomMove();
-			}
-		} else if (app.moves.length < 4) {
-			if (ninthT === 'X' && fifthT === 'X' && seventhT === '') {
-				seventh.html('O');
-				stopTurn(7);
-			} else if (secondT === 'X' && fifthT === 'O' && ninthT === 'X') {
-				third.html('O');
-				stopTurn(3);
-			} else if (secondT === 'X' && fifthT === 'O' && seventhT === 'X') {
-				first.html('O');
-				stopTurn(1);
-			} else if (fourthT === 'X' && fifthT === 'O' && ninthT === 'X') {
-				seventh.html('O');
-				stopTurn(7);
-			} else if (fourthT === 'X' && fifthT === 'O' && thirdT === 'X') {
-				first.html('O');
-				stopTurn(1);
-			} else if (sixthT === 'X' && fifthT === 'O' && firstT === 'X') {
-				third.html('O');
-				stopTurn(3);
-			} else if (sixthT === 'X' && fifthT === 'O' && seventhT === 'X') {
-				ninth.html('O');
-				stopTurn(9);
-			} else if (eighthT === 'X' && fifthT === 'O' && thirdT === 'X') {
-				ninth.html('O');
-				stopTurn(9);
-			} else if (eighthT === 'X' && fifthT === 'O' && firstT === 'X') {
-				seventh.html('O');
-				stopTurn(7);
-			} else if (eighthT === 'X' && fifthT === 'O' && fourthT === 'X') {
-				seventh.html('O');
-				stopTurn(7);
-			} else if (eighthT === 'X' && fifthT === 'O' && sixthT === 'X') {
-				ninth.html('O');
-				stopTurn(9);
-			} else if (secondT === 'X' && fifthT === 'O' && fourthT === 'X') {
-				first.html('O');
-				stopTurn(1);
-			} else if (secondT === 'X' && fifthT === 'O' && sixthT === 'X') {
-				third.html('O');
-				stopTurn(3);
-			} else {
-				randomMove();
-			}
-			
-		} else if (app.moves.length < 6) {
-			if (ninthT === 'X' && fifthT === 'X' && secondT === 'X' && eighthT === 'O' && seventhT === '') {
-				seventh.html('O');
-				stopTurn(7);
-			} else if (ninthT === 'X' && fifthT === 'X' && fourthT === 'X' && secondT === '') {
-				second.html('O');
-				stopTurn(2);
-			} else {
-				randomMove();
+    function compMove() {
+        if (app.moves.length < 2) {
+            if (fifthT === '') {
+                app.moves.push(5);
+                fifth.html('O');
+            } else {
+                randomMove();
+            }
+        } else if (app.moves.length < 4) {
+            if (ninthT === 'X' && fifthT === 'X' && seventhT === '') {
+                seventh.html('O');
+                stopTurn(7);
+            } else if (secondT === 'X' && fifthT === 'O' && ninthT === 'X') {
+                third.html('O');
+                stopTurn(3);
+            } else if (secondT === 'X' && fifthT === 'O' && seventhT === 'X') {
+                first.html('O');
+                stopTurn(1);
+            } else if (fourthT === 'X' && fifthT === 'O' && ninthT === 'X') {
+                seventh.html('O');
+                stopTurn(7);
+            } else if (fourthT === 'X' && fifthT === 'O' && thirdT === 'X') {
+                first.html('O');
+                stopTurn(1);
+            } else if (sixthT === 'X' && fifthT === 'O' && firstT === 'X') {
+                third.html('O');
+                stopTurn(3);
+            } else if (sixthT === 'X' && fifthT === 'O' && seventhT === 'X') {
+                ninth.html('O');
+                stopTurn(9);
+            } else if (eighthT === 'X' && fifthT === 'O' && thirdT === 'X') {
+                ninth.html('O');
+                stopTurn(9);
+            } else if (eighthT === 'X' && fifthT === 'O' && firstT === 'X') {
+                seventh.html('O');
+                stopTurn(7);
+            } else if (eighthT === 'X' && fifthT === 'O' && fourthT === 'X') {
+                seventh.html('O');
+                stopTurn(7);
+            } else if (eighthT === 'X' && fifthT === 'O' && sixthT === 'X') {
+                ninth.html('O');
+                stopTurn(9);
+            } else if (secondT === 'X' && fifthT === 'O' && fourthT === 'X') {
+                first.html('O');
+                stopTurn(1);
+            } else if (secondT === 'X' && fifthT === 'O' && sixthT === 'X') {
+                third.html('O');
+                stopTurn(3);
+            } else {
+                randomMove();
+            }
 
-			}
-			
-		} else if (app.moves.length < 8 && app.moves.length >= 6) {
-			if (ninthT === 'X' && fifthT === 'X' && secondT === '' && eighthT === '' && sixthT !== '') {
-				eighth.html('O');
-				app.moves.push(8);
-			} else {
-				randomMove();
-			}
-		} 
-		app.humanMove = true;
-	}
+        } else if (app.moves.length < 6) {
+            if (ninthT === 'X' && fifthT === 'X' && secondT === 'X' && eighthT === 'O' && seventhT === '') {
+                seventh.html('O');
+                stopTurn(7);
+            } else if (ninthT === 'X' && fifthT === 'X' && fourthT === 'X' && secondT === '') {
+                second.html('O');
+                stopTurn(2);
+            } else {
+                randomMove();
 
-	var counter = 0;
+            }
 
-	function stopThree (num, param1, param2) {
-		var block = $('#' + num);
-		var block1 = $('#' + (num + param1));
-		var block2 = $('#' + (num + param2));
-		if (compTurn) {
-			if (block.text() === block1.text() && block.text() === 'O' && block1.text() === 'O' && block2.text() === '') {
-				block2.html('O');
-				stopTurn(num);
-			} else if (block.text() === block2.text() && block.text() === 'O' && block2.text() === 'O' && block1.text() === '') {
-				block1.html('O');
-				stopTurn(num);
-			}			
-		} else {
-			if (!app.humanMove) {
-				goForWin();
-			};
-			if (!app.stoppage) {
-				if (block.text() === block1.text() && block.text() === 'X' && block1.text() === 'X' && block2.text() === '') {
-					block2.html('O');
-					app.moves.push(block2.attr('id'))
-					stopTurn(num);
-				} else if (block.text() === block2.text() && block.text() === 'X' && block2.text() === 'X' && block1.text() === '') {
-					block1.html('O');
-					app.moves.push(block1.attr('id'))
-					stopTurn(num);
-				} else {
-					if (app.moves.length <= app.turnCount) {
-						for (var i = app.moves.length - 1; i >= 0; i--) {
-							if (app.moves[i] !== num && app.moves.length <= app.turnCount) {
-								app.moves.push(num);
-							}
-						};
-					};
-					counter += 1;
-					if ((num === 2 || num === 4 || num === 6 || num === 8) && counter === 2) {
-						compMove();						
-					} else if ((num === 1 || num === 3 || num === 7 || num === 9) && counter === 3) {
-						compMove();
-					} else if (num === 5 && counter === 4) {
-						compMove();
-					}
-				}
-			}	
-		}	
-	}
+        } else if (app.moves.length < 8 && app.moves.length >= 6) {
+            if (ninthT === 'X' && fifthT === 'X' && secondT === '' && eighthT === '' && sixthT !== '') {
+                eighth.html('O');
+                app.moves.push(8);
+            } else {
+                randomMove();
+            }
+        }
+        app.humanMove = true;
+    }
 
-	function row (num, param1, param2) {
-		stopThree(num, param1, param2);
-	} 
+    var counter = 0;
 
-	function column (num, param1, param2) {
-		stopThree(num, param1, param2);
-	} 
+    function stopThree(num, param1, param2) {
+        var block = $('#' + num);
+        var block1 = $('#' + (num + param1));
+        var block2 = $('#' + (num + param2));
+        if (compTurn) {
+            if (block.text() === block1.text() && block.text() === 'O' && block1.text() === 'O' && block2.text() === '') {
+                block2.html('O');
+                stopTurn(num);
+            } else if (block.text() === block2.text() && block.text() === 'O' && block2.text() === 'O' && block1.text() === '') {
+                block1.html('O');
+                stopTurn(num);
+            }
+        } else {
+            if (!app.humanMove) {
+                goForWin();
+            };
+            if (!app.stoppage) {
+                if (block.text() === block1.text() && block.text() === 'X' && block1.text() === 'X' && block2.text() === '') {
+                    block2.html('O');
+                    app.moves.push(block2.attr('id'))
+                    stopTurn(num);
+                } else if (block.text() === block2.text() && block.text() === 'X' && block2.text() === 'X' && block1.text() === '') {
+                    block1.html('O');
+                    app.moves.push(block1.attr('id'))
+                    stopTurn(num);
+                } else {
+                    if (app.moves.length <= app.turnCount) {
+                        for (var i = app.moves.length - 1; i >= 0; i--) {
+                            if (app.moves[i] !== num && app.moves.length <= app.turnCount) {
+                                app.moves.push(num);
+                            }
+                        };
+                    };
+                    counter += 1;
+                    if ((num === 2 || num === 4 || num === 6 || num === 8) && counter === 2) {
+                        compMove();
+                    } else if ((num === 1 || num === 3 || num === 7 || num === 9) && counter === 3) {
+                        compMove();
+                    } else if (num === 5 && counter === 4) {
+                        compMove();
+                    }
+                }
+            }
+        }
+    }
 
-	function diagonal (num, param1, param2) {
-		stopThree(num, param1, param2);
-	}
+    function row(num, param1, param2) {
+        stopThree(num, param1, param2);
+    }
 
-	function checkId (id) {
-		if (id === 1) {
-			row(id,1,2);
-			column(id,3,6);
-			diagonal(id,4,8);
-		} else if (id === 2) {
-			row(id,-1,1);
-			column(id,3,6);
-		} else if (id === 3) {
-			row(id,-1,-2);
-			column(id,3,6);
-			diagonal(id,2,4);
-		} else if (id === 4) {
-			row(id,1,2);
-			column(id,-3,3);
-		} else if (id === 5) {
-			row(id,-1,1);
-			column(id,-3,3);
-			diagonal(id,-4,4);
-			diagonal(id,-2,2);
-		} else if (id === 6) {
-			row(id,-1,-2);
-			column(id,-3,3);
-		} else if (id === 7) {
-			row(id,1,2);
-			column(id,-6,-3);
-			diagonal(id,-2,-4);
-		} else if (id === 8) {
-			row(id,-1,1);
-			column(id,-6,-3);
-		} else {
-			row(id,-1,-2);
-			column(id,-6,-3);
-			diagonal(id,-4,-8);
-		}
-	}
+    function column(num, param1, param2) {
+        stopThree(num, param1, param2);
+    }
 
-	checkId(id);
+    function diagonal(num, param1, param2) {
+        stopThree(num, param1, param2);
+    }
+
+    function checkId(id) {
+        if (id === 1) {
+            row(id, 1, 2);
+            column(id, 3, 6);
+            diagonal(id, 4, 8);
+        } else if (id === 2) {
+            row(id, -1, 1);
+            column(id, 3, 6);
+        } else if (id === 3) {
+            row(id, -1, -2);
+            column(id, 3, 6);
+            diagonal(id, 2, 4);
+        } else if (id === 4) {
+            row(id, 1, 2);
+            column(id, -3, 3);
+        } else if (id === 5) {
+            row(id, -1, 1);
+            column(id, -3, 3);
+            diagonal(id, -4, 4);
+            diagonal(id, -2, 2);
+        } else if (id === 6) {
+            row(id, -1, -2);
+            column(id, -3, 3);
+        } else if (id === 7) {
+            row(id, 1, 2);
+            column(id, -6, -3);
+            diagonal(id, -2, -4);
+        } else if (id === 8) {
+            row(id, -1, 1);
+            column(id, -6, -3);
+        } else {
+            row(id, -1, -2);
+            column(id, -6, -3);
+            diagonal(id, -4, -8);
+        }
+    }
+
+    checkId(id);
 
 }
-app.lose = function () {
-	endGame('.lost-heading');
+app.lose = function() {
+    endGame('.lost-heading');
 }
 
-function endGame (el) {
-	$(el).animate({
-		'margin-left': '-30%'
-	}, 5000, function () {
-		location.reload();
-	});
-	$('.game-blocker-checkbox').prop('checked', true);
+function endGame(el) {
+    $(el).animate({
+        'margin-left': '-30%'
+    }, 5000, function() {
+        location.reload();
+    });
+    $('.game-blocker-checkbox').prop('checked', true);
 }
 
-app.catScan = function () {
-	endGame('.cat-heading')
+app.catScan = function() {
+    endGame('.cat-heading')
 }
-app.gameFunctionality = function () {
+app.gameFunctionality = function() {
 
-	if (app.gameBegan === true) {
-		console.log('reload');
-		location.reload()
-	}
+    if (app.gameBegan === true) {
+        location.reload()
+    }
 
-	app.gameBegan = true;
+    app.gameBegan = true;
 
-	var blocks = $('.game-block');
+    var blocks = $('.game-block');
 
-	function styleOs () {
-		for (var i = blocks.length - 1; i >= 0; i--) {
-			if (blocks[i].innerHTML === 'O') {
-				blocks[i].style.paddingRight = 2 + '%'
-				blocks[i].style.paddingLeft = 0 + '%'
-			}
-		};
-	}
+    function styleOs() {
+        for (var i = blocks.length - 1; i >= 0; i--) {
+            if (blocks[i].innerHTML === 'O') {
+                blocks[i].style.paddingRight = 2 + '%'
+                blocks[i].style.paddingLeft = 0 + '%'
+            }
+        };
+    }
 
-	var randomNum = Math.random();
+    var randomNum = Math.random();
 
-	if (randomNum >= .5) {
-		$('.first-heading').html('Computer goes first');
-		window.setTimeout(function () {
-			$('.game-block-first').html('O');
-			styleOs();
-		}, 1000);	
-	} else {
-		$('.first-heading').html('You go first');
-	}
+    if (randomNum >= .5) {
+        $('.first-heading').html('Computer goes first');
+        window.setTimeout(function() {
+            $('.game-block-first').html('O');
+            styleOs();
+        }, 1000);
+    } else {
+        $('.first-heading').html('You go first');
+    }
 
-	function computerMove (id) {
-		id = Number(id);
-		$('.game-blocker-checkbox').prop('checked', true);
-		window.setTimeout(function () {
-			app.computerReact(id);
-			$('.game-blocker-checkbox').prop('checked', false);
-			app.checkWin();
-			styleOs();
-		}, 1000);
-	}
+    function computerMove(id) {
+        id = Number(id);
+        $('.game-blocker-checkbox').prop('checked', true);
+        window.setTimeout(function() {
+            app.computerReact(id);
+            $('.game-blocker-checkbox').prop('checked', false);
+            app.checkWin();
+            styleOs();
+        }, 1000);
+    }
 
-	app.moves = [];
-	app.turnCount = 0;
+    app.moves = [];
+    app.turnCount = 0;
 
-	$('.game-block').on('click', function () {
-		var block = $(this);
-		app.stoppage = false;
-		app.humanMove = false;
-		app.randomDone = true;
-		styleOs;
-		if (block.html() === '') {			
-			app.turnCount += 1;
-			block.html('X');
-			app.checkWin();
-			computerMove(block.attr('id'));
-		} else {
-			console.log('spot already taken');
-		}
-	});
+    $('.game-block').on('click', function() {
+        var block = $(this);
+        app.stoppage = false;
+        app.humanMove = false;
+        app.randomDone = true;
+        styleOs;
+        if (block.html() === '') {
+            app.turnCount += 1;
+            block.html('X');
+            app.checkWin();
+            computerMove(block.attr('id'));
+        } else {
+            console.log('spot already taken');
+        }
+    });
 
 };
 /*! jQuery v2.1.3 | (c) 2005, 2014 jQuery Foundation, Inc. | jquery.org/license */
