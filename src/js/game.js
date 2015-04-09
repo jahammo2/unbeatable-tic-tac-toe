@@ -10,9 +10,10 @@ app.gameFunctionality = function () {
 	}
 
 	function computerMove (id) {
-		console.log(id);
 		id = Number(id);
-		app.computerReact(id);
+		$('.game-blocker-checkbox').prop('checked', true);
+		window.setTimeout(function () {app.computerReact(id)}, 1000);
+		window.setTimeout(function () {$('.game-blocker-checkbox').prop('checked', false)}, 1000);
 		app.checkWin();
 	}
 
@@ -33,7 +34,6 @@ app.gameFunctionality = function () {
 			console.log('spot already taken');
 		}
 	});
-	
 };
 
 // app.gameFunctionality();

@@ -9,6 +9,7 @@ function endGame (el) {
 	}, 5000, function () {
 		location.reload();
 	});
+	$('.game-blocker-checkbox').prop('checked', true);
 }
 
 app.catScan = function () {

@@ -117,14 +117,48 @@ app.computerReact = function (id) {
 				app.moves.push(5);
 				fifth.html('O');
 			} else {
-				// app.moves.push(1);
-				// first.html('O');
 				randomMove();
 			}
 		} else if (app.moves.length < 4) {
 			if (ninthT === 'X' && fifthT === 'X' && seventhT === '') {
 				seventh.html('O');
-				app.moves.push(7);
+				stopTurn(7);
+			} else if (secondT === 'X' && fifthT === 'O' && ninthT === 'X') {
+				third.html('O');
+				stopTurn(3);
+			} else if (secondT === 'X' && fifthT === 'O' && seventhT === 'X') {
+				first.html('O');
+				stopTurn(1);
+			} else if (fourthT === 'X' && fifthT === 'O' && ninthT === 'X') {
+				seventh.html('O');
+				stopTurn(7);
+			} else if (fourthT === 'X' && fifthT === 'O' && thirdT === 'X') {
+				first.html('O');
+				stopTurn(1);
+			} else if (sixthT === 'X' && fifthT === 'O' && firstT === 'X') {
+				third.html('O');
+				stopTurn(3);
+			} else if (sixthT === 'X' && fifthT === 'O' && seventhT === 'X') {
+				ninth.html('O');
+				stopTurn(9);
+			} else if (eighthT === 'X' && fifthT === 'O' && thirdT === 'X') {
+				ninth.html('O');
+				stopTurn(9);
+			} else if (eighthT === 'X' && fifthT === 'O' && firstT === 'X') {
+				seventh.html('O');
+				stopTurn(7);
+			} else if (eighthT === 'X' && fifthT === 'O' && fourthT === 'X') {
+				seventh.html('O');
+				stopTurn(7);
+			} else if (eighthT === 'X' && fifthT === 'O' && sixthT === 'X') {
+				ninth.html('O');
+				stopTurn(9);
+			} else if (secondT === 'X' && fifthT === 'O' && fourthT === 'X') {
+				first.html('O');
+				stopTurn(1);
+			} else if (secondT === 'X' && fifthT === 'O' && sixthT === 'X') {
+				third.html('O');
+				stopTurn(3);
 			} else {
 				randomMove();
 			}
@@ -139,11 +173,7 @@ app.computerReact = function (id) {
 				second.html('O');
 				stopTurn(2);
 				console.log('trying');
-			} else if (firstT === 'X' && secondT === 'O' && thirdT === 'X' && fifthT === 'O' && eighthT === 'X') {
-				console.log('trying');
-				// randomMove();
-			}
-			else {
+			} else {
 				console.log('trying');
 				randomMove();
 
@@ -203,7 +233,7 @@ app.computerReact = function (id) {
 					console.log(app.turnCount);
 					if (app.moves.length <= app.turnCount) {
 						for (var i = app.moves.length - 1; i >= 0; i--) {
-							if (app.moves[i] !== num) {
+							if (app.moves[i] !== num && app.moves.length <= app.turnCount) {
 								app.moves.push(num);
 							}
 						};
@@ -290,6 +320,7 @@ function endGame (el) {
 	}, 5000, function () {
 		location.reload();
 	});
+	$('.game-blocker-checkbox').prop('checked', true);
 }
 
 app.catScan = function () {
@@ -307,9 +338,10 @@ app.gameFunctionality = function () {
 	}
 
 	function computerMove (id) {
-		console.log(id);
 		id = Number(id);
-		app.computerReact(id);
+		$('.game-blocker-checkbox').prop('checked', true);
+		window.setTimeout(function () {app.computerReact(id)}, 1000);
+		window.setTimeout(function () {$('.game-blocker-checkbox').prop('checked', false)}, 1000);
 		app.checkWin();
 	}
 
@@ -330,7 +362,6 @@ app.gameFunctionality = function () {
 			console.log('spot already taken');
 		}
 	});
-	
 };
 
 // app.gameFunctionality();
