@@ -101,6 +101,9 @@ app.computerReact = function(id) {
             } else if (secondT === 'X' && fifthT === 'O' && sixthT === 'X') {
                 third.html('O');
                 stopTurn(3);
+            } else if (firstT === 'X' && fifthT === 'X' && ninthT === 'O') {
+                seventh.html('O');
+                stopTurn(7);
             } else {
                 randomMove();
             }

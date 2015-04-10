@@ -179,6 +179,9 @@ app.computerReact = function(id) {
             } else if (secondT === 'X' && fifthT === 'O' && sixthT === 'X') {
                 third.html('O');
                 stopTurn(3);
+            } else if (firstT === 'X' && fifthT === 'X' && ninthT === 'O') {
+                seventh.html('O');
+                stopTurn(7);
             } else {
                 randomMove();
             }
@@ -343,7 +346,7 @@ app.gameFunctionality = function() {
 
     var randomNum = Math.random();
 
-    if (randomNum >= .5) {
+    if (randomNum >= 2) {
         $('.first-heading').html('Computer goes first');
         window.setTimeout(function() {
             $('.game-block-first').html('O');
