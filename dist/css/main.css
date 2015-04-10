@@ -116,7 +116,7 @@ body {
   width: 30%;
   height: 100px;
   background: #EB1767;
-  padding: 1%;
+  padding: 1% .75% 1% 1.25%;
   padding-top: 22px; }
 
 .game-block::first-letter {
